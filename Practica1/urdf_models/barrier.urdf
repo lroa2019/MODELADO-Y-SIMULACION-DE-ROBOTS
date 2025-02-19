@@ -1,26 +1,35 @@
 <?xml version="1.0" ?>
+<?xml version="1.0" ?>
 <robot name="barrier">
     
-    <!-- Poste fijo (cilindro rojo) -->
-    <link name="post">
-        <visual>
-            <geometry>
-                <cylinder radius="0.2" length="1.0"/>
-            </geometry>
-            <material name="red">
+	<link name="cylinder">
+		<visual>
+			<!--origin xyz="17 1.4 0.5" rpy="0 0 0"/-->
+			<geometry>
+				<cylinder radius="0.2" length="1.0"/>
+			</geometry>
+	     	<material name="red">
                 <color rgba="1 0 0 1"/>
             </material>
-        </visual>
-        <collision>
-            <geometry>
-                <cylinder radius="0.2" length="1.0"/>
-            </geometry>
-        </collision>
-    </link>
+	   </visual>
+	</link>
+
+	<link name="wrist_link">
+		<visual>
+			<!--origin xyz="17 1.4 0.5" rpy="0 0 0"/-->
+			<geometry>
+				<cylinder radius="0.35" length="0.1"/>
+			</geometry>
+	     	<material name="red">
+                <color rgba="1 0 0 1"/>
+            </material>
+	   </visual>
+	</link>
 
     <!-- Brazo de la barrera móvil (Desplazado en Y -1) -->
     <link name="bar">
         <visual>
+            <origin xyz="0 1 0.05" rpy="0 0 0"/>
             <geometry>
                 <box size="0.1 2 0.2"/>  
             </geometry>
@@ -28,18 +37,18 @@
                 <color rgba="1 0 0 1"/>
             </material>
         </visual>
-        <collision>
-            <geometry>
-                <box size="0.1 2 0.2"/>
-            </geometry>
-        </collision>
     </link>
 
     <!-- Articulación de rotación en el extremo del brazo sobre el eje Z -->
+    <joint name="wrist_joint" type="fixed">
+    	<parent link="wrist_link"/>
+    	<child link="bar"/>
+    	<origin xyz="0 0 -0.055" rpy="0 0 0"/>
+	</joint>
+
     <joint name="rotation_joint" type="revolute">
-        <parent link="post"/>
-        <child link="bar"/>
-        <origin xyz="0 -1 0"/>  <!-- Movemos la articulación al extremo del brazo -->
+        <parent link="cylinder"/>
+        <child link="wrist_link"/>
         <axis xyz="0 0 1"/>  <!-- Rotación en el eje Z -->
         <limit lower="-1.57" upper="1.57"/>
     </joint>
