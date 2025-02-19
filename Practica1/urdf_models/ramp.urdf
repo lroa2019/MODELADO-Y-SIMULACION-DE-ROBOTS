@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<robot name="ramp">
+    <link name="base">
+        <visual>
+            <geometry>
+                <box size="10 2 1.5"/>  
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+</robot>
