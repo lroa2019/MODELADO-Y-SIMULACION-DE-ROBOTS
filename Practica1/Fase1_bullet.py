@@ -14,12 +14,12 @@ planeId = p.loadURDF("plane.urdf")
 huskyId = p.loadURDF("husky/husky.urdf", [0, 0, 0.1])
 
 # Cargar los elementos del escenario
-rampId = p.loadURDF("urdf_models/ramp.urdf", [10, 0, 0], useFixedBase=True)
-barrierId = p.loadURDF("urdf_models/barrier.urdf", [17, 1, 0.5], useFixedBase=True)
-goalId = p.loadURDF("urdf_models/goal.urdf", [20, 0, 0.05], useFixedBase=True)
+rampId = p.loadURDF("urdf_models/ramp.urdf", useFixedBase=True)
+barrierId = p.loadURDF("urdf_models/barrier.urdf", useFixedBase=True)
+goalId = p.loadURDF("urdf_models/goal.urdf", useFixedBase=True)
 
-# Simulación durante 10 segundos
-for _ in range(24000):  # 10 segundos a 240 FPS
+# Simulación durante 30 segundos
+for _ in range(7200):  # 30 segundos a 240 FPS
     p.stepSimulation()
     time.sleep(1 / 240)
 
