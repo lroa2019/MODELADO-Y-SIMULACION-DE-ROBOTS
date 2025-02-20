@@ -1,10 +1,9 @@
 <?xml version="1.0" ?>
-<?xml version="1.0" ?>
 <robot name="barrier">
     
 	<link name="cylinder">
 		<visual>
-			<!--origin xyz="17 1.4 0.5" rpy="0 0 0"/-->
+			<origin xyz="17 1.5 0.5" rpy="0 0 0"/>
 			<geometry>
 				<cylinder radius="0.2" length="1.0"/>
 			</geometry>
@@ -16,9 +15,9 @@
 
 	<link name="wrist_link">
 		<visual>
-			<!--origin xyz="17 1.4 0.5" rpy="0 0 0"/-->
+			<origin xyz="17 1.5 0.3" rpy="0 0 0"/>
 			<geometry>
-				<cylinder radius="0.35" length="0.1"/>
+				<cylinder radius="0.35" length="0.2"/>
 			</geometry>
 	     	<material name="red">
                 <color rgba="1 0 0 1"/>
@@ -26,12 +25,12 @@
 	   </visual>
 	</link>
 
-    <!-- Brazo de la barrera móvil (Desplazado en Y -1) -->
+    <!-- Brazo de la barrera móvil -->
     <link name="bar">
         <visual>
-            <origin xyz="0 1 0.05" rpy="0 0 0"/>
+            <origin xyz="17 0.2 0.35" rpy="0 0 0"/>
             <geometry>
-                <box size="0.1 2 0.2"/>  
+                <box size="0.1 2.22 0.2"/>  
             </geometry>
             <material name="red">
                 <color rgba="1 0 0 1"/>
@@ -39,13 +38,14 @@
         </visual>
     </link>
 
-    <!-- Articulación de rotación en el extremo del brazo sobre el eje Z -->
+    <!-- Articulación fija en el extremo del brazo -->
     <joint name="wrist_joint" type="fixed">
     	<parent link="wrist_link"/>
     	<child link="bar"/>
     	<origin xyz="0 0 -0.055" rpy="0 0 0"/>
 	</joint>
 
+    <!-- Articulación de rotación en el extremo del brazo sobre el eje Z -->
     <joint name="rotation_joint" type="revolute">
         <parent link="cylinder"/>
         <child link="wrist_link"/>
