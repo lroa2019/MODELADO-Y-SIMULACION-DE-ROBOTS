@@ -3,8 +3,13 @@
     
 	<!-- Bloque azul en (10,0,0) -->
 	<link name="block">
+		<inertial>
+			<mass value="10"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
 		<visual>
-			<origin xyz="10 0 0" rpy="0 0 0"/>
+			<origin xyz="3.5 0 0" rpy="0 0 0"/>
 			<geometry>
 				<box size="4 2 1.5"/> 
 			</geometry>
@@ -12,12 +17,23 @@
 				<color rgba="0 0 1 1"/>
 			</material>
 		</visual>
+		<collision>
+			<origin xyz="3.5 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="4 2 1.5"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<!-- Rampa de subida inclinada -->
 	<link name="rampa_subida">
+		<inertial>
+			<mass value="5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5"/>
+		</inertial>
 		<visual>
-			<origin xyz="6.5 0 0.35" rpy="0 -0.228 0"/>  <!-- Se rota en Y (pitch) -->
+			<origin xyz="0 0 0.35" rpy="0 -0.228 0"/>  <!-- Se rota en Y (pitch) -->
 			<geometry>
 				<box size="3.1 2 0.1"/> 
 			</geometry>
@@ -25,12 +41,23 @@
 				<color rgba="0 0 1 1"/>
 			</material>
 		</visual>
+		<collision>
+			<origin xyz="0 0 0.35" rpy="0 -0.228 0"/>
+			<geometry>
+				<box size="3.1 2 0.1"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<!-- Rampa de subida inclinada -->
 	<link name="rampa_bajada">
+		<inertial>
+			<mass value="5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5"/>
+		</inertial>
 		<visual>
-			<origin xyz="13.5 0 0.35" rpy="0 0.228 0"/>  <!-- Se rota en Y (pitch) -->
+			<origin xyz="7.0 0 0.35" rpy="0 0.228 0"/>  <!-- Se rota en Y (pitch) -->
 			<geometry>
 				<box size="3.1 2 0.1"/> 
 			</geometry>
@@ -38,6 +65,12 @@
 				<color rgba="0 0 1 1"/>
 			</material>
 		</visual>
+		<collision>
+			<origin xyz="7.0 0 0.35" rpy="0 0.228 0"/>
+			<geometry>
+				<box size="3.1 2 0.1"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<!-- Unión fija entre la rampa y el bloque -->
