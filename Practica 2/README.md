@@ -23,6 +23,7 @@ Este modelo estará listo para la integración con el mecanismo "Pick and Place"
 <div align="center">
   <img src="https://github.com/user-attachments/assets/93fc8605-7a72-4e83-b1e8-1fbaf57a02e1" alt="Rover 1" height="350"/>
   <img src="https://github.com/user-attachments/assets/52522cd0-df85-4685-bdaf-b3d72d151dcc" alt="Rover 2" height="350"/>
+  <img src="https://github.com/user-attachments/assets/615cfc40-d701-4cb2-b5f0-c1c93d7d9d4b" alt="Rover 3" height="350"/>
 </div>
 
 ## **Fase 2: Implementación del Mecanismo "Pick and Place"**  
