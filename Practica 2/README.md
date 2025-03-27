@@ -33,11 +33,11 @@ En esta fase se añadirá un **brazo robótico SCARA** con un **gripper de dos o
 ### **Requisitos del Brazo Robótico**  
 El brazo debe cumplir con las siguientes especificaciones:  
 - **Estructura:** SCARA (Selective Compliance Articulated Robot Arm).  
-- **Grados de libertad:** 4 (**RRTR**)  
+- **Grados de libertad:** 4 (**RRRT**)  
   - **R:** Rotación en la base del brazo.  
-  - **R:** Rotación en el primer eslabón.  
+  - **R:** Rotación en el primer eslabón.
+  - **R:** Rotación en la muñeca para orientar el objeto. 
   - **T:** Traslación en el eje vertical para bajar el gripper.  
-  - **R:** Rotación en la muñeca para orientar el objeto.  
 - **Longitud de los brazos:** Cada segmento debe medir entre 1 y 2 metros.  
 - **Gripper:** Puede ser de dos o más dedos, con capacidad de sujetar un cubo de 0.5 m de lado.  
 
