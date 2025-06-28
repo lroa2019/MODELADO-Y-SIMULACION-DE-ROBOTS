@@ -151,8 +151,8 @@ start_orientation = p.getQuaternionFromEuler([0, 0, 0])
 
 # Cargar escenario
 plane = p.loadURDF("plane.urdf", [0,0,0], start_orientation)
-robot = p.loadURDF("spydy_gonzalez/urdf/spydy_gonzalez.urdf", [0.0, 0.0, 1], start_orientation)
-cuby = p.loadURDF("cuby/urdf/cuby.urdf", [0.0, 4.0, 0.0], start_orientation)
+robot = p.loadURDF("models/spydy_gonzalez/urdf/spydy_gonzalez.urdf", [0.0, 0.0, 1], start_orientation)
+cuby = p.loadURDF("models/cuby/urdf/cuby.urdf", [0.0, 4.0, 0.0], start_orientation)
 
 # Información de joints para debug
 num_joints_spydy = p.getNumJoints(robot)
@@ -167,7 +167,7 @@ p.changeDynamics(robot, F1_JOINT, jointLowerLimit=-0.5, jointUpperLimit=0.5)
 p.changeDynamics(robot, F2_JOINT, jointLowerLimit=-0.5, jointUpperLimit=0.5)
 
 # Crear archivo CSV para registrar datos
-file = open("Fase3_Laura_Roa.csv", mode="w", newline="")
+file = open("csv_results/Fase3_Laura_Roa.csv", mode="w", newline="")
 writer = csv.writer(file)
 writer.writerow(["Tiempo", "NumeroJoints", "G_parcial"])
 
