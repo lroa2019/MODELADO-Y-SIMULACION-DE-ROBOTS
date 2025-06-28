@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Cargar el CSV
-csv_filename = "Fase3_Laura_Roa.csv"
+csv_filename = "csv_results/Fase3_Laura_Roa.csv"
 data = pd.read_csv(csv_filename)
 
 # Extraer datos
@@ -25,5 +25,6 @@ plt.legend()
 plt.grid(True)
 
 # Guardar como PDF
-plt.savefig("Fase3_Laura_Roa.pdf")
+output_path = "plots/Fase3_Laura_Roa.pdf"
+plt.savefig(output_path)
 plt.show()
