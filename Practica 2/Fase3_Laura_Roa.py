@@ -113,14 +113,14 @@ def ik_to(target_pos, target_orn=None, num_iters=1000, max_joint_speed=0.1):
   return [jts[i] for i in [6, 7, 8, 9]]
 
 # Mueve el brazo a una configuración deseada (posiciones conjuntas)
-def servo_arm(qs, kp=0.1, max_force=700):
+def servo_arm(qs, kp=0.05, max_force=1000):
   p.setJointMotorControl2(robot, Q1_JOINT, p.POSITION_CONTROL, targetPosition=qs[0], positionGain=kp, force=max_force)
   p.setJointMotorControl2(robot, Q2_JOINT, p.POSITION_CONTROL, targetPosition=qs[1], positionGain=kp, force=max_force)
   p.setJointMotorControl2(robot, ARM_GRIP_JOINT, p.POSITION_CONTROL, targetPosition=qs[2], positionGain=kp, force=max_force)
   p.setJointMotorControl2(robot, EEF_LINK, p.POSITION_CONTROL, targetPosition=2.78, positionGain=kp, force=max_force)
 
 # Control del gripper (abrir o cerrar)
-def grip(close=True, kp=0.1, max_force=700):
+def grip(close=True, kp=0.05, max_force=1000):
   position = 0.0 if close else 0.5
   p.setJointMotorControl2(robot, F1_JOINT, p.POSITION_CONTROL, targetPosition=position, positionGain=kp, force=max_force)
   p.setJointMotorControl2(robot, F2_JOINT, p.POSITION_CONTROL, targetPosition=position, positionGain=kp, force=max_force)
