@@ -1,0 +1,79 @@
+<robot name="floatingbase" version="1.0">
+  <joint name="FreeFlyerRX" type="revolute">
+    <limit lower="-1.57000" upper="1.57000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="FreeFlyerZ_Link"/>
+    <child link="FreeFlyerRX_Link"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="FreeFlyerRY" type="revolute">
+    <limit lower="-1.57000" upper="1.57000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="FreeFlyerRX_Link"/>
+    <child link="FreeFlyerRY_Link"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="FreeFlyerRZ" type="revolute">
+    <limit lower="-1.57000" upper="1.57000" effort="0" velocity="0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="FreeFlyerRY_Link"/>
+    <child link="new_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="FreeFlyerX" type="prismatic">
+    <limit lower="-1.57000" upper="1.57000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="base_link"/>
+    <child link="FreeFlyerX_Link"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="FreeFlyerY" type="prismatic">
+    <limit lower="-1.57000" upper="1.57000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="FreeFlyerX_Link"/>
+    <child link="FreeFlyerY_Link"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="FreeFlyerZ" type="prismatic">
+    <limit lower="-1.57000" upper="1.57000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <parent link="FreeFlyerY_Link"/>
+    <child link="FreeFlyerZ_Link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <link name="FreeFlyerRX_Link"/>
+  <link name="FreeFlyerRY_Link"/>
+  <link name="FreeFlyerX_Link"/>
+  <link name="FreeFlyerY_Link"/>
+  <link name="FreeFlyerZ_Link"/>
+  <link name="base_link">
+    <inertial>
+      <inertia ixx="0.00000" ixy="0.00000" ixz="0.00000" iyy="0.00000" iyz="0.00000" izz="0.00000"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00000"/>
+    </inertial>
+  </link>
+  <link name="new_link">
+    <collision name="Cube_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.25000"/>
+      <geometry>
+        <box size="0.50000 0.50000 0.50000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.16667" ixy="0.00000" ixz="0.00000" iyy="0.16667" iyz="0.00000" izz="0.16667"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.25000"/>
+      <mass value="4.00000"/>
+    </inertial>
+    <visual name="Cube">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.25000"/>
+      <material name="Material"/>
+      <geometry>
+        <box size="0.50000 0.50000 0.50000"/>
+      </geometry>
+    </visual>
+  </link>
+  <material name="Material">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+</robot>
