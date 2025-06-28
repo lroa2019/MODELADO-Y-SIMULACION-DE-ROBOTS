@@ -167,7 +167,7 @@ p.changeDynamics(robot, F1_JOINT, jointLowerLimit=-0.5, jointUpperLimit=0.5)
 p.changeDynamics(robot, F2_JOINT, jointLowerLimit=-0.5, jointUpperLimit=0.5)
 
 # Crear archivo CSV para registrar datos
-file = open("Fase3_laura_roa.csv", mode="w", newline="")
+file = open("Fase3_Laura_Roa.csv", mode="w", newline="")
 writer = csv.writer(file)
 writer.writerow(["Tiempo", "NumeroJoints", "G_parcial"])
 
