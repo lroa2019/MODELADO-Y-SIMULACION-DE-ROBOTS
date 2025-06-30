@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<robot name="robot_model" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="finger" params="parent index *origin *axis" >
+    <joint name="finger_${index}_link_joint" type="prismatic">
+      <limit lower="0.00000" upper="0.40000" effort="100.00000" velocity="10.00000"/>
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="finger_${index}_link"/>
+      <xacro:insert_block name="axis"/>
+    </joint>
+
+    <link name="finger_${index}_link">
+      <collision name="finger_${index}_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <geometry>
+          <box size="0.05000 0.60000 0.30000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.03750" ixy="0.00000" ixz="0.00000" iyy="0.00771" iyz="0.00000" izz="0.03021"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="5.00000"/>
+      </inertial>
+      <visual name="finger_${index}">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="finger_${index}_material"/>
+        <geometry>
+          <box size="0.05000 0.60000 0.30000"/>
+        </geometry>
+      </visual>
+    </link>
+    <material name="finger_${index}_material">
+      <color rgba="0.00000 0.00392 0.80000 1.00000"/>
+    </material>
+  </xacro:macro>
+
+  <xacro:macro name="gripper" params="parent" >
+    <joint name="fingers_base_link_joint" type="continuous">
+      <limit lower="-90" upper="90" effort="1000.00000" velocity="100.00000"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -1.65000"/>
+      <parent link="${parent}"/>
+      <child link="fingers_base_link"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+    </joint>
+
+    <link name="fingers_base_link">
+      <collision name="fingers_base_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cube.220.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.45312" ixy="0.00000" ixz="0.00000" iyy="1.25313" iyz="0.00000" izz="1.70000"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 0.00000"/>
+        <mass value="5.00000"/>
+      </inertial>
+      <visual name="fingers_base">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material.003"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cube.219.dae" scale="0.50000 0.30000 0.02500"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <xacro:finger parent="fingers_base_link" index="1">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.05000 0.00000 -0.18000"/>
+      <axis xyz="1.00000 0.00000 0.00000"/>
+    </xacro:finger>
+
+    <xacro:finger parent="fingers_base_link" index="2">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.05000 0.00000 -0.18000"/>
+      <axis xyz="-1.00000 0.00000 0.00000"/>
+    </xacro:finger>
+    
+    <material name="Material.003">
+      <color rgba="0.80000 0.68627 0.08235 1.00000"/>
+    </material>
+  </xacro:macro>
+</robot>

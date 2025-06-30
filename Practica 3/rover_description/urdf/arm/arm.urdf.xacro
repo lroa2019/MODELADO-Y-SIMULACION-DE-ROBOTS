@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<robot name="robot_model" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="arm" params="parent *origin" >
+    <joint name="scara_base_link_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="scara_base_link"/>
+    </joint>
+    <joint name="scara_gripper_arm_link_joint" type="prismatic">
+      <limit lower="-1.5" upper="1.5" effort="1000.00000" velocity="100.00000"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.71000 0.00000 0.00000"/>
+      <parent link="scara_l2_link"/>
+      <child link="scara_gripper_arm_link"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+    </joint>
+    <joint name="scara_l1_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.76000 -0.00000 1.04000"/>
+      <parent link="scara_q1_link"/>
+      <child link="scara_l1_link"/>
+    </joint>
+    <joint name="scara_l2_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.77000 -0.00000 0.21000"/>
+      <parent link="scara_q2_link"/>
+      <child link="scara_l2_link"/>
+    </joint>
+    <joint name="scara_q1_link_joint" type="continuous">
+      <limit lower="0" upper="0"  effort="1000.00000" velocity="100.00000"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.85000"/>
+      <parent link="scara_base_link"/>
+      <child link="scara_q1_link"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+    </joint>
+    <joint name="scara_q2_link_joint" type="continuous">
+      <limit lower="0" upper="0" effort="1000.00000" velocity="100.00000"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.79000 -0.00000 -0.25000"/>
+      <parent link="scara_l1_link"/>
+      <child link="scara_q2_link"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+    </joint>
+    <link name="scara_base_link">
+      <collision name="scara_base_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <cylinder radius="0.50000" length="0.20000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.32917" ixy="0.00000" ixz="0.00000" iyy="0.32917" iyz="0.00000" izz="0.62500"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="500.00000"/>
+      </inertial>
+      <visual name="scara_base">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="Material.004"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.dae" scale="0.50000 0.50000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <link name="scara_gripper_arm_link">
+      <collision name="scara_gripper_arm_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.12000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.016.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="2.58981" ixy="0.00000" ixz="0.00000" iyy="2.58981" iyz="0.00000" izz="0.05962"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.10000"/>
+        <mass value="8.00000"/>
+      </inertial>
+      <visual name="scara_gripper_arm">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.12000"/>
+        <material name="Material.002"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.016.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <link name="scara_l1_link">
+      <collision name="scara_l1_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.50000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cube.dae" scale="1.00000 0.20000 0.20000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.08000" ixy="0.00000" ixz="0.00000" iyy="1.04000" iyz="0.00000" izz="1.04000"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.50000"/>
+        <mass value="3.00000"/>
+      </inertial>
+      <visual name="scara_l1">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.50000"/>
+        <material name="Material.004"/>
+        <geometry>
+          <box size="2.00000 0.40000 0.40000"/>
+        </geometry>
+      </visual>
+    </link>
+    <link name="scara_l2_link">
+      <collision name="scara_l2_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cube.002.dae" scale="1.00000 0.20000 0.20000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.08000" ixy="0.00000" ixz="0.00000" iyy="1.04000" iyz="0.00000" izz="1.04000"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="3.00000"/>
+      </inertial>
+      <visual name="scara_l2">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="Material.004"/>
+        <geometry>
+          <box size="2.00000 0.40000 0.40000"/>
+        </geometry>
+      </visual>
+    </link>
+    <link name="scara_q1_link">
+      <collision name="scara_q1_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.001.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.59231" ixy="0.00000" ixz="-0.00000" iyy="0.59231" iyz="-0.00000" izz="0.05962"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <mass value="3.00000"/>
+      </inertial>
+      <visual name="scara_q1">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="Material.002"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.001.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <link name="scara_q2_link">
+      <collision name="scara_q2_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.008.dae" scale="0.95000 0.95000 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.27690" ixy="0.00000" ixz="0.00000" iyy="0.27690" iyz="0.00000" izz="0.05380"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="3.00000"/>
+      </inertial>
+      <visual name="scara_q2">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material.002"/>
+        <geometry>
+          <mesh filename="file://$(find rover_description)/meshes/dae/Cylinder.008.dae" scale="0.95000 0.95000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <material name="Material.002">
+      <color rgba="0.00000 0.00392 0.80000 1.00000"/>
+    </material>
+    <material name="Material.004">
+      <color rgba="0.80000 0.00000 0.00392 1.00000"/>
+    </material>
+  </xacro:macro>
+</robot>

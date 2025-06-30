@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="rover" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- includes -->
+    <xacro:include filename="$(find rover_description)/urdf/base/robot_base.urdf.xacro"/>
+    <xacro:include filename="$(find rover_description)/urdf/wheels/rover_wheel.urdf.xacro"/>
+    <xacro:include filename="$(find rover_description)/urdf/arm/arm.urdf.xacro"/>
+    <xacro:include filename="$(find rover_description)/urdf/arm/gripper.urdf.xacro"/>
+
+    <xacro:include filename="$(find rover_description)/urdf/sensors/camera.urdf.xacro"/>
+    <xacro:include filename="$(find rover_description)/urdf/sensors/imu.urdf.xacro"/>
+
+    <!-- Propiedades -->
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <xacro:property name="wheel_offset_x" value="1.2"/>
+    <xacro:property name="wheel_offset_y" value="1.3"/>
+    <xacro:property name="wheel_offset_z" value="0.4"/>
+    <xacro:property name="arm_offset_x" value="0.0"/>
+    <xacro:property name="arm_offset_y" value="1.2"/>
+    <xacro:property name="arm_offset_z" value="0.85"/>
+    
+
+    <!-- argumentos -->
+    <xacro:arg name="robot_ns" default=""/>
+    <xacro:arg name="prefix" default=""/>
+    <!-- Robot Parts -->
+    <!-- Base -->
+    
+    <xacro:robot_base prefix="$(arg prefix)"/>
+    <!-- Wheels -->
+    <!-- Seis ruedas: delantera, central y trasera en cada lado -->
+    <xacro:rover_wheel prefix="front_right_" parent="base_link">
+        <origin xyz="${wheel_offset_x} -${wheel_offset_y} -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+    <xacro:rover_wheel prefix="center_right_" parent="base_link">
+        <origin xyz="${wheel_offset_x} 0 -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+    <xacro:rover_wheel prefix="rear_right_" parent="base_link">
+        <origin xyz="${wheel_offset_x} ${wheel_offset_y} -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+
+    <xacro:rover_wheel prefix="front_left_" parent="base_link">
+        <origin xyz="-${wheel_offset_x} -${wheel_offset_y} -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+    <xacro:rover_wheel prefix="center_left_" parent="base_link">
+        <origin xyz="-${wheel_offset_x} 0 -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+    <xacro:rover_wheel prefix="rear_left_" parent="base_link">
+        <origin xyz="-${wheel_offset_x} ${wheel_offset_y} -${wheel_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:rover_wheel>
+    <!-- Arm -->
+    <xacro:arm parent="base_link">
+        <origin xyz="${arm_offset_x} ${arm_offset_y} ${arm_offset_z}" rpy="0 0 0"/>
+    </xacro:arm>
+
+    <xacro:gripper parent="scara_gripper_arm_link"/>
+
+    <!-- sensores -->
+    <xacro:camera node_name="front_camera" node_namespace="$(arg robot_ns)" prefix="$(arg prefix)front_camera_" parent="$(arg prefix)base_link" >
+        <origin xyz="0.0 1.4 0.5" rpy="0 0 ${PI/2}"/>
+    </xacro:camera>
+    <xacro:camera node_name="arm_camera" node_namespace="$(arg robot_ns)" prefix="$(arg prefix)arm_camera_" parent="fingers_base_link" >
+        <origin xyz="0.0 0.0 -0.01" rpy="0 ${PI} 0"/>
+    </xacro:camera>
+    <xacro:imu node_name="base_imu" node_namespace="$(arg robot_ns)" prefix="$(arg prefix)imu_" parent="$(arg prefix)base_link">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </xacro:imu>
+
+
+    <!-- Gazebo ROS control plugins-->
+    <xacro:include filename="$(find rover_description)/urdf/ros2_control.urdf.xacro"/>
+    <xacro:arg name="config_controllers" default="$(find rover_description)/config/rover_controllers.yaml"/>
+    <xacro:arg name="update_rate" default="100"/>
+    <xacro:ros2_control/>
+
+</robot>
