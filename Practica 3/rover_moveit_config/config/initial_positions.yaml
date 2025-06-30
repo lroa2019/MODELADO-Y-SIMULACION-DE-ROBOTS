@@ -1,0 +1,9 @@
+# Default initial positions for rover's ros2_control fake system
+
+initial_positions:
+  finger_1_link_joint: 0
+  finger_2_link_joint: 0
+  fingers_base_link_joint: 0
+  scara_gripper_arm_link_joint: 0
+  scara_q1_link_joint: 0
+  scara_q2_link_joint: 0
